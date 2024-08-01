@@ -313,7 +313,7 @@ def login_func():
             
             # function to show data from excel file is here
             def load_data():
-                path = "C:/Users/Acer/OneDrive/Documents/GitHub/Medical-Store-Management/Product_list.xlsx"
+                path = "C:/Users/Acer/OneDrive/Documents/GitHub/medical store management new/medical-store-management/Product_list.xlsx"
                 workbook = openpyxl.load_workbook(path)
                 sheet = workbook.active
                 list_values = list(sheet.values)
@@ -396,7 +396,7 @@ def login_func():
 
         def load_data_home_menu():
            # path = "F:/BIE/Python/Medical Store Management/Product_list.xlsx"
-            path = "C:/Users/Acer/OneDrive/Documents/GitHub/Medical-Store-Management/Product_list.xlsx"
+            path = "C:/Users/Acer/OneDrive/Documents/GitHub/medical store management new/medical-store-management/Product_list.xlsx"
             workbook = openpyxl.load_workbook(path)
             sheet = workbook.active
             list_values = list(sheet.values)
