@@ -19,7 +19,7 @@ import tkinter as tk
 from tkinter import ttk
 root = Tk()
 root.geometry("1000x700")
-root.resizable(width = False, height= False)
+root.resizable(width = True, height= True)
 # root.configure(bg="#153448")
 
 style = ttk.Style(root)
