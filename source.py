@@ -1,6 +1,5 @@
 import os
 from tkinter import *
-
 from tkinter import messagebox
 from docxtpl import DocxTemplate
 from tkdocviewer import *
@@ -8,7 +7,6 @@ from tkdocviewer import *
 # from win32com.gen_py.word import *
 # py -3.12 -m pip install docxtpl
 import datetime
-
 import customtkinter
 # py -3.12 -m pip install customtkinter
 import openpyxl
@@ -18,7 +16,7 @@ import tkinter
 import tkinter as tk
 from tkinter import ttk
 root = Tk()
-root.geometry("1000x700")
+root.geometry("1000x690")
 root.resizable(width = True, height= True)
 # root.configure(bg="#153448")
 
@@ -26,10 +24,13 @@ style = ttk.Style(root)
 root.tk.call("source", "forest-light.tcl")
 root.tk.call("source", "forest-dark.tcl")
 style.theme_use("forest-dark")
+# icon
+img = PhotoImage(file='icon.png')
+root.iconphoto(False, img)
 
-root.title('Zaman Medical Store')
+root.title('RockHead Medical Store')
 usr = "blank user"
-label = ttk.Label(text="Zaman Medical Store", font='System 25 bold', foreground="#9BEC00")
+label = ttk.Label(text="RockHead Medical Store", font='System 25 bold', foreground="#9BEC00")
 label.place(relx=0.5, rely=0.3, anchor=CENTER)
 
 fexo = 100
@@ -66,7 +67,6 @@ def login_func():
     button = ttk.Button(root, text="Enter", width=25, command=lambda: check(name_entry.get() + " " + password_entry.get()))
     button.place(relx=0.5, rely=0.65, anchor=CENTER)
     user_name = name_entry.get()
-
 
     # to check the password and the username
 
@@ -152,6 +152,7 @@ def login_func():
             qty_label = ttk.Label(frame, text="Quantity")
             qty_label.grid(row=4,column=0)
             qty_spinbox = customtkinter.CTkEntry(frame)
+            qty_spinbox = tkinter.Spinbox(frame, from_=0, to=500, increment=5)
             qty_spinbox.grid(row = 5, column= 0)
 
             desc_label = ttk.Label(frame, text="Description")
@@ -163,7 +164,7 @@ def login_func():
             price_label = ttk.Label(frame, text="Unit Price")
             price_label.grid(row = 4, column= 2)
             price_spinbox = customtkinter.CTkEntry(frame)
-            # price_spinbox = tkinter.Spinbox(frame, from_=0.00, to=500.00, increment= 0.5)
+            price_spinbox = tkinter.Spinbox(frame, from_=0.00, to=500.00, increment= 0.5)
             price_spinbox.grid(row = 5, column = 2)
              
             # generate invoice
@@ -181,7 +182,7 @@ def login_func():
                             "subtotal":subtotal,
                             "salestax":str(salestax*100)+ "%",
                             "total":total})
-                doc_name = "new_invoice"+name+datetime.datetime.now().strftime("%Y-%m-%d-%H%M%S")+".docs"
+                doc_name = "new_invoice"+name+datetime.datetime.now().strftime("%Y-%m-%d")+".docx"
                 doc.save(doc_name)
                 
                 doc_window = Toplevel(root)
@@ -191,6 +192,7 @@ def login_func():
                 v1 = DocViewer(doc_window)
                 v1.pack(side="top", expand=1, fill="both")
                 v1.display_file(doc_name)
+                
                 messagebox.showinfo("invoice complete", "Invoice Created")
 
                 new_invoice()
@@ -295,8 +297,6 @@ def login_func():
                 quantity_spinbox.delete(0, "end")
                 quantity_spinbox.insert(0, "Enter Quantity")
 
-
-
             insert_button = ttk.Button(widgets_frame, text="Insert", command= insert_product_func)
             insert_button.grid(row=3,column=0, sticky="ew")
 
@@ -342,11 +342,12 @@ def login_func():
 
         add = ttk.Button(buttons_frame,text="Add",command=add_p)
         add.grid(row=1,column=0,padx=5, pady=5 ,sticky="ew")
-        search = ttk.Button(buttons_frame,text="Search")
-        search.grid(row=2,column=0,padx=5, pady=5, sticky="ew")
+        # search = ttk.Button(buttons_frame,text="Search")
+        # search.grid(row=2,column=0,padx=5, pady=5, sticky="ew")
 
+        """
         def l():  # list function
-            """
+            
             p = Toplevel(root)
             p.title("Product List")
             p.geometry("1000x600")
@@ -354,7 +355,7 @@ def login_func():
             label_p.place(relx=0.5, rely=0.1, anchor=CENTER)
             p.resizable(width=False, height=False)
 
-            """
+            
             buy.destroy()
             add.destroy()
             search.destroy()
@@ -392,9 +393,10 @@ def login_func():
             product_list.place(relx=0.5, rely=0.5, anchor=CENTER)
             style = ttk.Style(root)
             style.configure("Treeview", background='#153448', foreground='#DFD0B8')
-            
-        lll = ttk.Button(buttons_frame,text="Product List", command=l)
-        lll.grid(row=3,column=0,padx=5, pady=5,sticky="ew")
+        
+        """
+        # lll = ttk.Button(buttons_frame,text="Product List", command=l)
+        # lll.grid(row=3,column=0,padx=5, pady=5,sticky="ew")
 
         def load_data_home_menu():
            # path = "F:/BIE/Python/Medical Store Management/Product_list.xlsx"
@@ -439,7 +441,7 @@ def reg_func():
     label.destroy()
     login.destroy()
     register.destroy()
-    label2 = Label(text="Sign Up", font='System 33 bold', bg="#153448", fg="#DFD0B8")
+    label2 = Label(text="Sign Up", font='System 33 bold', fg="#9BEC00")
     label2.place(relx=0.5, rely=0.2, anchor=CENTER)
 
     name = customtkinter.CTkLabel(root, text="Username :", font=("System", 30), corner_radius=50)
@@ -488,5 +490,6 @@ login.place(relx=0.5, rely=0.5, anchor=CENTER)
 # Register Button
 register = ttk.Button (text="Sign Up", width=20,command=reg_func)
 register.place(relx=0.5, rely=0.55, anchor=CENTER)
+
 
 root.mainloop()
